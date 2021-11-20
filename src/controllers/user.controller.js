@@ -8,11 +8,12 @@ router.post("", async (req, res) => {
 
     const user = await User.create(req.body);
 
-    return res.send(user)
+    return res.send(user);
 });
 
 router.get("", async (req, res) => {
-    const users = await User.find().lean().exec();
+    const email = req.body.email;
+    const users = await User.findOne({email: email}).lean().exec();
 
     return res.send(users);
 });
